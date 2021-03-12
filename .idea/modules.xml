@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KittSample.iml" filepath="$PROJECT_DIR$/.idea/modules/KittSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KITT/KittSample.KITT.iml" filepath="$PROJECT_DIR$/.idea/modules/KITT/KittSample.KITT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/KittSample.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/KittSample.app.iml" />
+    </modules>
+  </component>
+</project>
