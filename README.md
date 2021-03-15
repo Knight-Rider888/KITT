@@ -28,6 +28,6 @@ dependencies {
 
 ### MD5Utils | [查看使用方式](https://github.com/Knight-Rider888/KITT/blob/main/README-MD5Utils.md)
 
-### MD5Utils | [查看使用方式](https://github.com/Knight-Rider888/KITT/blob/main/README-StorageUtils.md)
+### StorageUtils | [查看使用方式](https://github.com/Knight-Rider888/KITT/blob/main/README-StorageUtils.md)
 
 
