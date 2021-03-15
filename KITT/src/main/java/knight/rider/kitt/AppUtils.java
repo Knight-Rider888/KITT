@@ -50,7 +50,7 @@ public class AppUtils {
     /**
      * 获取其它应用缓存大小
      * <p>
-     * API26 需动态申请权限: android.permission.PACKAGE_USAGE_STATS
+     * API26 需申请特殊权限: android.permission.PACKAGE_USAGE_STATS
      * <p>
      * 可使用工具类{@link PermissionPackageUsageStatsUtils}进行权限操作
      *
