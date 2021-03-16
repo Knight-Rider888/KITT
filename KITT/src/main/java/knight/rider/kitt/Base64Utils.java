@@ -65,7 +65,7 @@ public class Base64Utils {
      *
      * @param base64Data the input String to decode.
      */
-    public static Bitmap base642Bitmap(String base64Data) {
+    public static Bitmap base64ToBitmap(String base64Data) {
         byte[] bytes = Base64.decode(base64Data, Base64.NO_WRAP);
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
