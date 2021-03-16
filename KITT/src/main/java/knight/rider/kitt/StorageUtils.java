@@ -87,7 +87,7 @@ public class StorageUtils {
         String rootFilePath = getExclusiveStorageDir(context, subDirRelativePath);
 
         // 去除已知的扩展名，然后根据已知扩展名进行填充
-        fileName = MediaFile.getFileTitleByKnownMimeType(fileName) + (mimeType == null ? "" : "." + mimeType.extension);
+        fileName = MediaFile.getFileTitleByKnownMimeType(fileName) + (mimeType == null ? "" : "." + mimeType.extension.toLowerCase());
 
 
         // 需要判断名称是否重复，重复重命名
@@ -138,7 +138,7 @@ public class StorageUtils {
 
 
         // 去除已知的扩展名，然后根据已知扩展名进行填充
-        fileName = MediaFile.getFileTitleByKnownMimeType(fileName) + (mimeType == null ? "" : "." + mimeType.extension);
+        fileName = MediaFile.getFileTitleByKnownMimeType(fileName) + (mimeType == null ? "" : "." + mimeType.extension.toLowerCase());
 
         // 需要判断名称是否重复，重复重命名
         fileName = localFileReleaseNames(rootFilePath, fileName);
