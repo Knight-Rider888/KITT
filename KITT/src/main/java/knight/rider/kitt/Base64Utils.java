@@ -61,6 +61,16 @@ public class Base64Utils {
     }
 
     /**
+     * base64转为bitmap
+     *
+     * @param base64Data the input String to decode.
+     */
+    public static Bitmap base642Bitmap(String base64Data) {
+        byte[] bytes = Base64.decode(base64Data, Base64.NO_WRAP);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+    /**
      * 字符串转换成Base64
      *
      * @param input the data to encode
