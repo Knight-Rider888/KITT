@@ -1,5 +1,5 @@
 # KITT
-工具类集合 ![](https://github.com/Knight-Rider888/KITT)
+工具类集合 [![](https://jitpack.io/v/Knight-Rider888/KITT.svg)](https://jitpack.io/#Knight-Rider888/KITT)
 
 Step 1. Add it in your root build.gradle at the end of repositories:
 ```
