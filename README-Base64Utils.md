@@ -6,3 +6,5 @@
 - base64ToBitmap() base64转为bitmap
 
 - string2Base64() 字符串转Base64
+
+- decodeBase64() base64解码
