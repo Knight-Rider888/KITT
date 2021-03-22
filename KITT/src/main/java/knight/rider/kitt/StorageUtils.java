@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -53,7 +54,7 @@ public class StorageUtils {
     }
 
     /**
-     * 要返回的共享文件的目录，可以是{@link ShareStorage}的根目录或子目录
+     * 要返回的共享文件的目录，可以是{@link knight.rider.kitt.type.ShareStorage}的根目录或子目录
      * <p>
      * Android 6.0 需动态申请权限：Manifest.permission.WRITE_EXTERNAL_STORAGE
      *
@@ -143,7 +144,22 @@ public class StorageUtils {
         // 需要判断名称是否重复，重复重命名
         fileName = localFileReleaseNames(rootFilePath, fileName);
 
-        return rootFilePath + File.separator + fileName;
+
+        boolean isOpenSuccess = true;
+
+        FileOutputStream fileOutputStream = null;
+
+        try {
+            // OPPO 如果已删除文件与要写入文件同名 打开输出流会失败，华为则无问题
+            // 减少异常出现的几率，打开失败时前面加入时间戳
+            fileOutputStream = new FileOutputStream(new File(rootFilePath + File.separator + fileName));
+            if (fileOutputStream != null)
+                fileOutputStream.close();
+        } catch (Exception e) {
+            isOpenSuccess = false;
+        }
+
+        return rootFilePath + File.separator + (isOpenSuccess ? fileName : System.currentTimeMillis() + fileName);
     }
 
 
