@@ -308,14 +308,14 @@ public class ImageUtils {
     /**
      * 添加水印文字
      *
-     * @param waterText       the watermark content.
-     * @param position        the text position ,support top and bottom.
-     * @param textColor       the new color (including alpha) to set in the paint.
-     * @param textSize        set the paint's text size in pixel units.
-     * @param backgroundColor set the text background color.
-     * @param backgroundAlpha set the alpha component [0..255] of the paint's color.
+     * @param waterText   the watermark content.
+     * @param position    the text position ,support top and bottom.
+     * @param textColor   the new color (including alpha) to set in the paint.
+     * @param textSize    set the paint's text size in pixel units.
+     * @param textBgColor set the text background color.
+     * @param textBgAlpha set the alpha component [0..255] of the paint's color.
      */
-    public static Bitmap addWatermark(Bitmap bitmap, String waterText, TextPosition position, @ColorInt int textColor, int textSize, @ColorInt int backgroundColor, int backgroundAlpha) {
+    public static Bitmap addWatermark(Bitmap bitmap, String waterText, TextPosition position, @ColorInt int textColor, int textSize, @ColorInt int textBgColor, int textBgAlpha) {
         // 获取原始图片与水印图片的宽与高
         int bitmapWidth = bitmap.getWidth();
         int bitmapHeight = bitmap.getHeight();
@@ -338,8 +338,8 @@ public class ImageUtils {
         canvas.save();
 
         Paint p = new Paint();
-        p.setColor(Color.BLACK);// 设置红色
-        p.setAlpha(100);
+        p.setColor(textBgColor);
+        p.setAlpha(textBgAlpha);
 
         if (lineCount > bitmapHeight / lineHeight) {
             // 超出
