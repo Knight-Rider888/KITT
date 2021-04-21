@@ -308,12 +308,14 @@ public class ImageUtils {
     /**
      * 添加水印文字
      *
-     * @param waterText the watermark content.
-     * @param position  the text position ,support top and bottom.
-     * @param color     the new color (including alpha) to set in the paint.
-     * @param textSize  set the paint's text size in pixel units.
+     * @param waterText       the watermark content.
+     * @param position        the text position ,support top and bottom.
+     * @param textColor       the new color (including alpha) to set in the paint.
+     * @param textSize        set the paint's text size in pixel units.
+     * @param backgroundColor set the text background color.
+     * @param backgroundAlpha set the alpha component [0..255] of the paint's color.
      */
-    public static Bitmap addWatermark(Bitmap bitmap, String waterText, TextPosition position, @ColorInt int color, int textSize) {
+    public static Bitmap addWatermark(Bitmap bitmap, String waterText, TextPosition position, @ColorInt int textColor, int textSize, @ColorInt int backgroundColor, int backgroundAlpha) {
         // 获取原始图片与水印图片的宽与高
         int bitmapWidth = bitmap.getWidth();
         int bitmapHeight = bitmap.getHeight();
@@ -323,7 +325,7 @@ public class ImageUtils {
         canvas.drawBitmap(bitmap, 0, 0, null);
         // 添加文字
         TextPaint mPaint = new TextPaint();
-        mPaint.setColor(color);
+        mPaint.setColor(textColor);
         mPaint.setTextSize(textSize);
 
         // 行高
@@ -335,17 +337,27 @@ public class ImageUtils {
         int lineCount = layout.getLineCount();
         canvas.save();
 
+        Paint p = new Paint();
+        p.setColor(Color.BLACK);// 设置红色
+        p.setAlpha(100);
+
         if (lineCount > bitmapHeight / lineHeight) {
             // 超出
+            canvas.drawRect(0, 0, bitmapWidth, bitmapHeight, p);
             canvas.translate(20, 0);
         } else {
+
+            float v = lineCount * lineHeight;
+
             if (position == TextPosition.TOP) {
+                canvas.drawRect(0, 0, bitmapWidth, v, p);
                 canvas.translate(20, 0);
             } else {
-                float v = lineCount * lineHeight;
-                canvas.translate(20, 400 - v);
+                canvas.drawRect(0, bitmapHeight - v, bitmapWidth, bitmapHeight, p);
+                canvas.translate(20, bitmapHeight - v);
             }
         }
+
 
         layout.draw(canvas);
         canvas.restore();
