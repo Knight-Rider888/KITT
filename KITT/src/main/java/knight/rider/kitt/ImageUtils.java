@@ -319,6 +319,9 @@ public class ImageUtils {
         // 获取原始图片与水印图片的宽与高
         int bitmapWidth = bitmap.getWidth();
         int bitmapHeight = bitmap.getHeight();
+
+        textSize = (int) (bitmapWidth * 1.0f / 500 * textSize);
+
         Bitmap newBitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(newBitmap);
         // 向位图中开始画入Bitmap原始图片
