@@ -8,13 +8,20 @@ import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.RequiresPermission;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+
+import knight.rider.kitt.type.TextPosition;
 
 public class ImageUtils {
 
@@ -296,5 +303,53 @@ public class ImageUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 添加水印文字
+     *
+     * @param waterText the watermark content.
+     * @param position  the text position ,support top and bottom.
+     * @param color     the new color (including alpha) to set in the paint.
+     * @param textSize  set the paint's text size in pixel units.
+     */
+    public static Bitmap addWatermark(Bitmap bitmap, String waterText, TextPosition position, @ColorInt int color, int textSize) {
+        // 获取原始图片与水印图片的宽与高
+        int bitmapWidth = bitmap.getWidth();
+        int bitmapHeight = bitmap.getHeight();
+        Bitmap newBitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(newBitmap);
+        // 向位图中开始画入Bitmap原始图片
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        // 添加文字
+        TextPaint mPaint = new TextPaint();
+        mPaint.setColor(color);
+        mPaint.setTextSize(textSize);
+
+        // 行高
+        float lineHeight = mPaint.descent() - mPaint.ascent();
+        // 水印的位置坐标(设置最大行数，需要反射调用13参，暂不支持)
+        StaticLayout layout = new StaticLayout(
+                waterText, 0, waterText.length(), mPaint, bitmap.getWidth() - 40, Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F, false, TextUtils.TruncateAt.END, bitmap.getWidth() - 40);
+
+        int lineCount = layout.getLineCount();
+        canvas.save();
+
+        if (lineCount > bitmapHeight / lineHeight) {
+            // 超出
+            canvas.translate(20, 0);
+        } else {
+            if (position == TextPosition.TOP) {
+                canvas.translate(20, 0);
+            } else {
+                float v = lineCount * lineHeight;
+                canvas.translate(20, 400 - v);
+            }
+        }
+
+        layout.draw(canvas);
+        canvas.restore();
+
+        return newBitmap;
     }
 }
