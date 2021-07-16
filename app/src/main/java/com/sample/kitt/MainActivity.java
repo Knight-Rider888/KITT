@@ -35,4 +35,8 @@ public class MainActivity extends AppCompatActivity {
     public void ImageUtils(View view) {
         startActivity(new Intent(this, ImageUtilsActivity.class));
     }
+
+    public void WordUtils(View view) {
+        startActivity(new Intent(this, WordUtilsActivity.class));
+    }
 }

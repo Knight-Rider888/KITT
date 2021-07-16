@@ -32,4 +32,6 @@ dependencies {
 
 ### StorageUtils | [查看使用方式](https://github.com/Knight-Rider888/KITT/blob/main/README-StorageUtils.md)
 
+### WordUtils | [查看使用方式](https://github.com/Knight-Rider888/KITT/blob/main/README-WordUtils.md)
+
 

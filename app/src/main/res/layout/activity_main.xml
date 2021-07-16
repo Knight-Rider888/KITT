@@ -39,5 +39,11 @@
             android:layout_height="50dp"
             android:onClick="ImageUtils"
             android:text="ImageUtils" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:onClick="WordUtils"
+            android:text="WordUtils" />
     </LinearLayout>
 </ScrollView>
