@@ -34,6 +34,6 @@ dependencies {
 
 ### WordUtils | [查看使用方式](https://github.com/Knight-Rider888/KITT/blob/main/README-WordUtils.md)
 
-### SpannableStringUtils  | [查看使用方式](https://github.com/Knight-Rider888/KITT/blob/main/README-SpannableStringUtils .md)
+### SpannableStringUtils  | [查看使用方式](https://github.com/Knight-Rider888/KITT/blob/main/README-SpannableStringUtils.md)
 
 
