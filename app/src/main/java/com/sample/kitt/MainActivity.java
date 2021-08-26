@@ -39,4 +39,8 @@ public class MainActivity extends AppCompatActivity {
     public void WordUtils(View view) {
         startActivity(new Intent(this, WordUtilsActivity.class));
     }
+
+    public void SpannableStringUtils(View view) {
+        startActivity(new Intent(this, SpannableStringUtilsActivity.class));
+    }
 }

@@ -15,7 +15,7 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-    implementation 'com.github.Knight-Rider888:KITT:0.0.9'
+    implementation 'com.github.Knight-Rider888:KITT:1.0.1'
 }
 ```
 
@@ -33,5 +33,7 @@ dependencies {
 ### StorageUtils | [查看使用方式](https://github.com/Knight-Rider888/KITT/blob/main/README-StorageUtils.md)
 
 ### WordUtils | [查看使用方式](https://github.com/Knight-Rider888/KITT/blob/main/README-WordUtils.md)
+
+### SpannableStringUtils  | [查看使用方式](https://github.com/Knight-Rider888/KITT/blob/main/README-SpannableStringUtils .md)
 
 
