@@ -315,4 +315,41 @@ public class AppUtils {
         return version_code;
     }
 
+    /**
+     * 获取本应用版本名称
+     *
+     * @param activity {@link android.app.Activity} object.
+     */
+    public static String getAppVersionName(Context activity) {
+        String version_name = "";
+        try {
+            // 获取软件版本号，对应AndroidManifest.xml下的versionCode
+            version_name = activity.getPackageManager().
+                    getPackageInfo(activity.getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return version_name;
+    }
+
+    /**
+     * 获取其它应用版本名称
+     *
+     * @param activity    {@link android.app.Activity} object.
+     * @param packageName target app packageName.
+     */
+    public static String getAppVersionName(Context activity, String packageName) {
+        String version_name = "";
+        try {
+            // 获取软件版本号，对应AndroidManifest.xml下的versionCode
+            version_name = activity.getPackageManager().
+                    getPackageInfo(packageName, 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return version_name;
+    }
+
 }
