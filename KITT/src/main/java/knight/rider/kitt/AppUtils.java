@@ -3,6 +3,8 @@ package knight.rider.kitt;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.usage.StorageStats;
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
@@ -352,4 +354,31 @@ public class AppUtils {
         return version_name;
     }
 
+    /**
+     * 结束当前App进程
+     */
+    public static void killProgress() {
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    /**
+     * 重启App
+     */
+    public static void rebootApp(Context context) {
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//与正常页面跳转一样可传递序列化数据,在Launch页面内获得
+        context.startActivity(intent);
+        killProgress();
+    }
+
+    /**
+     * 重启App
+     */
+    public static void rebootAppByAlarm(Context context) {
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+        PendingIntent restartIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, restartIntent);
+        killProgress();
+    }
 }
