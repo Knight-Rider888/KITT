@@ -220,7 +220,7 @@ public class TimeUtils {
      * @return
      */
     @SuppressLint("SimpleDateFormat")
-    public String covertShortTime(long time, TimeFormat format) {
+    public static String covertShortTime(long time, TimeFormat format) {
 
         if (time <= 0)
             return "";

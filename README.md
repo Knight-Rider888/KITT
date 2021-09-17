@@ -15,7 +15,7 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-    implementation 'com.github.Knight-Rider888:KITT:1.0.6'
+    implementation 'com.github.Knight-Rider888:KITT:1.0.7'
 }
 ```
 
