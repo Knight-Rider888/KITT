@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import knight.rider.kitt.type.TimeFormat;
 
@@ -211,46 +212,56 @@ public class TimeUtils {
 
     /**
      * 格式化时间
-     * 本周前 显示为简短日期 2020/10/12（此为根据TimeFormat传值）
-     * 本周内 显示 昨天、星期几、15:20（此为根据TimeFormat传值）
+     * 去年及以前 显示 2020/10/12 10:20
+     * 今年 显示为简短日期 10/12 20:22（此为根据TimeFormat传值）
+     * 本周内 显示 昨天15:05、星期几15:05、15:20（此为根据TimeFormat传值）
      * 未来时间 显示为年月日时分（此为根据TimeFormat传值）
-     *
-     * @param time
-     * @param format
-     * @return
      */
     @SuppressLint("SimpleDateFormat")
     public static String covertShortTime(long time, TimeFormat format) {
 
-        if (time <= 0)
-            return "";
+        // 原路返回
+        if (time <= 0 || format == null)
+            return String.valueOf(time);
 
         long todayEndTime = getTodayEndTime();
+
+        // 目标时间
+        String targetFormat = new SimpleDateFormat(format.getFormat()).format(time);
+        String[] split = targetFormat.split(" ");
+        int i = split[0].length() + 1;
+        // 15:05
+        String shortTime = targetFormat.substring(i);
+        // 年
+        int targetYear = Integer.parseInt(targetFormat.substring(0, 4));
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date(todayEndTime));
+        int year = c.get(Calendar.YEAR);
+
 
         // 今天23:59:59:999之后
         // 即传入的时间为未来时间，直接显示格式化的内容
         if (time > todayEndTime) {
-            return new SimpleDateFormat(format.getFormat()).format(time);
+            return targetFormat;
         } else if (time < getWeekStartTime()) {
             // 此周前（本周星期一之前）
             // 显示年月日
-            String format1 = format.getFormat();
-            String newFormat = format1.split(" ")[0];
-            return new SimpleDateFormat(newFormat).format(time);
+            if (targetYear != year)
+                return targetFormat;
+            else
+                return targetFormat.substring(5);
         } else {
             // 显示星期 时分
             if (time < todayEndTime - oneDayTime * 2) {
                 // 显示星期
-                return getWeek(time);
+                return getWeek(time) + " " + shortTime;
             } else if (time < todayEndTime - oneDayTime) {
                 // 显示昨天
-                return "昨天";
+                return "昨天 " + shortTime;
             } else {
-                // 显示今天
-                String format2 = new SimpleDateFormat(format.getFormat()).format(time);
-                String[] split = format2.split(" ");
-                int i = split[0].length() + 1;
-                return format2.substring(i);
+                // 显示今天的具体时间
+                return shortTime;
             }
         }
     }
